@@ -1,1 +1,1 @@
-# CompanySentimentAnalyzer
+# Sentzer
