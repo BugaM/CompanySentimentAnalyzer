@@ -1,36 +1,43 @@
 import { useState } from "react";
+import { useRouter } from "next/router";
 import { Layout, Menu } from "antd";
-import {
-  TwitterOutlined,
-  LineChartOutlined,
-  SettingOutlined,
-} from "@ant-design/icons";
-import type { MenuProps } from "antd";
+import { LineChartOutlined, SettingOutlined } from "@ant-design/icons";
 
 const { Sider } = Layout;
 
-type MenuItem = Required<MenuProps>["items"][number];
+interface AuthSidebarItemData {
+  title: string;
+  icon?: JSX.Element;
+  path?: string;
+  subItems?: { [key: string]: AuthSidebarItemData };
+}
 
-const sidebarItems: MenuItem[] = [
-  {
-    label: "Analysis",
-    key: "analysis",
+const authSidebarData: { [key: string]: AuthSidebarItemData } = {
+  analysis: {
+    title: "Analysis",
     icon: <LineChartOutlined />,
+    path: "/Analysis",
   },
-  {
-    label: "Twitter",
-    key: "twitter",
-    icon: <TwitterOutlined />,
-  },
-  {
-    label: "Settings",
-    key: "settings",
+  settings: {
+    title: "Settings",
     icon: <SettingOutlined />,
+    path: "/Settings",
   },
-];
+};
+
+function getItem(itemID: string): AuthSidebarItemData {
+  const split = itemID.split("-");
+  if (split.length === 1) {
+    return authSidebarData[split[0]];
+  }
+  return (authSidebarData[split[0]].subItems || {})[split[1]];
+}
 
 const Sidebar = () => {
   const [collapsed, setCollapsed] = useState<boolean>(true);
+  const router = useRouter();
+  const currentRoute = router.pathname;
+  const current: string[] = [];
 
   return (
     <Sider
@@ -47,7 +54,25 @@ const Sidebar = () => {
       theme="light"
       width={150}
     >
-      <Menu items={sidebarItems} />
+      <Menu
+        theme="light"
+        mode="inline"
+        onClick={(menuItem) => {
+          const item = getItem(menuItem.key);
+          if (item.path && item.path !== currentRoute) {
+            router.push(item.path);
+          }
+        }}
+        triggerSubMenuAction="hover"
+        defaultSelectedKeys={current}
+        defaultOpenKeys={current}
+        items={Object.entries(authSidebarData).map(([index, item]) => ({
+          key: index,
+          icon: item.icon,
+          label: item.title,
+          path: item.path,
+        }))}
+      />
     </Sider>
   );
 };
