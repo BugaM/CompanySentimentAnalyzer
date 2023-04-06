@@ -4,4 +4,4 @@ scraper/bin
 scraper/include
 scraper/lib
 scraper/share
-scraper/pyenv.cfg
+scraper/pyvenv.cfg
