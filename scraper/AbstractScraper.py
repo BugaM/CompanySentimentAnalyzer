@@ -65,6 +65,22 @@ class AbstractScraper(ABC):
         :type query: str
         :rtype: List of NetworkPost
         """
+        pass
+
+    @abstractmethod
+    def timed_search(self, query, start_date, end_date):
+        """
+        Searches the website for a certain query, in the specific time interval.
+
+        :param query: Query to be searched.
+        :type query: str
+        :param start_date: Starting date for search.
+        :type start_date: datetime
+        :param end_date: Ending date for search.
+        :type end_date: datetime
+        :rtype: List of NetworkPost
+        """
+        pass    
 
     # @abstractmethod
     # def set_end_date(self, end_date):
