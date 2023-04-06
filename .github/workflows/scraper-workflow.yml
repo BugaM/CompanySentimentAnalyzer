@@ -7,7 +7,8 @@ name: Scraper-workflow
 
 on:
   push:
-    branches: [ "main", "scraper-ci" ]
+    branches: 
+      - '**scraper**'
   pull_request:
     branches: [ "main" ]
 
