@@ -1,12 +1,11 @@
-import { Col, Typography, Row } from "antd";
+import { Col, Row } from "antd";
+import Home from "@/components/Home";
 
-const { Text } = Typography;
-
-export default function Home() {
+export default function HomePage() {
   return (
     <Col span={24}>
       <Row justify="center">
-        <Text>Home</Text>
+        <Home />
       </Row>
     </Col>
   );

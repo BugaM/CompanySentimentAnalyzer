@@ -13,20 +13,21 @@ export default function App({ Component, pageProps }: AppProps) {
     <ConfigProvider
       theme={{
         token: {
-          colorPrimary: "#039363",
+          colorPrimary: "#039093",
+          colorBgBase: "#FFFFFF",
         },
         components: {
           Menu: {
             colorItemTextHover: "#FFFFFF",
-            colorItemText: "#2aa87e",
-            colorItemTextSelected: "#039363",
-            colorItemBgHover: "#039363",
+            colorItemText: "#0d8d87",
+            colorItemTextSelected: "#0d8d87",
+            colorItemBgHover: "#0d8d87",
             colorItemBgSelected: "#FFFFFF",
             colorSubItemBg: "#FFFFFF",
             colorActiveBarBorderSize: 0,
           },
           Layout: {
-            colorBgHeader: "#039363",
+            colorBgHeader: "#0d8d87",
           },
           Typography: {
             colorText: "#FFFFFF",
@@ -48,14 +49,18 @@ export default function App({ Component, pageProps }: AppProps) {
                 },
               }}
             >
-              <Content>
+              <Content
+                style={{
+                  background: "#FFFFFF",
+                }}
+              >
                 <Component {...pageProps} />
+                <Footer
+                  style={{ textAlign: "center", backgroundColor: "#f0fffa" }}
+                >{`Sentzer ©${new Date().getFullYear()}`}</Footer>
               </Content>
             </ConfigProvider>
           </Layout>
-          <Footer
-            style={{ textAlign: "center" }}
-          >{`Sentzer ©${new Date().getFullYear()}`}</Footer>
         </Layout>
       </UserProvider>
     </ConfigProvider>

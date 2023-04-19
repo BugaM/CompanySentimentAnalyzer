@@ -53,10 +53,12 @@ const Sidebar = () => {
       }}
       theme="light"
       width={150}
+      style={{ background: "#f0fffa" }}
     >
       <Menu
         theme="light"
         mode="inline"
+        style={{ background: "#f0fffa" }}
         onClick={(menuItem) => {
           const item = getItem(menuItem.key);
           if (item.path && item.path !== currentRoute) {
