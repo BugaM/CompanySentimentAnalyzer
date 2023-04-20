@@ -5,7 +5,7 @@ import pandas as pd
 from datetime import datetime
 
 # Sentzer implementations
-sys.path.append('../backend/db')
+sys.path.append("../backend/db")
 from twitter_scraper import TwitterScraper
 from db import DBSession
 
@@ -128,5 +128,6 @@ if args.f is not None:
 # If the flag for sending data to the database is active, send the data.
 if args.s:
     db_session = DBSession()
-    data_collection = db_session.get_collection('TwitterPosts').insert_many(posts.to_dict('records'))
-    
+    data_collection = db_session.get_collection("TwitterPosts").insert_many(
+        posts.to_dict("records")
+    )
