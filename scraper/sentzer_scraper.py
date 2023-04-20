@@ -5,9 +5,9 @@ import pandas as pd
 from datetime import datetime
 
 # Sentzer implementations
-sys.path.append("../backend/db")
 from twitter_scraper import TwitterScraper
-from db import DBSession
+sys.path.append("../backend/db")
+from db import DBSession  # noqa: E402
 
 #######################################################################################################################
 # Parser Implementation ----------------------------------------------------------------------------------------------#
