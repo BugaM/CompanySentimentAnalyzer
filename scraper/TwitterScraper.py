@@ -61,12 +61,15 @@ class TwitterScraper(AbstractScraper):
                 )
             )
 
-        print('Finished scraping tweets !')
+        print("Finished scraping tweets !")
 
         return tweets
 
     def timed_search(
-        self, search_string: str, start_date: datetime, end_date: datetime
+        self,
+        search_string: str,
+        start_date: datetime,
+        end_date: datetime = datetime.today(),
     ) -> List[NetworkPost]:
         # Somebody will get this wrong at some point in time.
         # It may be me.
@@ -86,7 +89,6 @@ class TwitterScraper(AbstractScraper):
             + " until:"
             + end.isoformat()[0:10]
         )
-
         print("Searching with query:\n" + query)
 
         scraper_search = sntwitter.TwitterSearchScraper(query).get_items()
@@ -101,14 +103,13 @@ class TwitterScraper(AbstractScraper):
                     content=tweet.rawContent,
                     author=self.parse_user(tweet.user),
                     date=tweet.date,
-
                     source=tweet.source.split(" ")[-1][
                         0:-4
                     ],  # This leaves only the platform used. e.g. Android
-
                     likes=tweet.likeCount,
                 )
             )
 
-        print('Finished scraping tweets !')
+        print("Finished scraping tweets !")
+
         return tweets
