@@ -2,7 +2,8 @@ import { Slide } from "react-awesome-reveal";
 import { Carousel, Col, Row, Layout } from "antd";
 
 import HomeQuote from "./Slide3Quote";
-import defaultUserIcon from "../../../../../public/defaultuser.png";
+import alexandreIcon from "../../../../../public/alexandre.jpg";
+import maximoIcon from "../../../../../public/maximo.jpg";
 
 const { Content } = Layout;
 
@@ -14,7 +15,7 @@ const Slide3 = () => {
           <Carousel style={{ backgroundColor: "#0d8d87" }} autoplay>
             <Content>
               <HomeQuote
-                iconSrc={defaultUserIcon.src}
+                iconSrc={alexandreIcon.src}
                 quoteText={
                   "In laudantium unde et ipsum accusantium hic eligendi magni utnecessitatibus dolores nam nemo sequi. Vel libero accusantium etconsequatur odit non internos odit sed dolor eligendi ut veritatisomnis et quia illum."
                 }
@@ -24,12 +25,12 @@ const Slide3 = () => {
             </Content>
             <Content>
               <HomeQuote
-                iconSrc={defaultUserIcon.src}
+                iconSrc={maximoIcon.src}
                 quoteText={
                   "In laudantium unde et ipsum accusantium hic eligendi magni utnecessitatibus dolores nam nemo sequi. Vel libero accusantium etconsequatur odit non internos odit sed dolor eligendi ut veritatisomnis et quia illum."
                 }
-                authorName={"Alexandre Bernat"}
-                authorDescription={"Start Carreiras CEO"}
+                authorName={"Marcos Máximo"}
+                authorDescription={"Professor do ITA e diretor da ITAndroids"}
               />
             </Content>
           </Carousel>

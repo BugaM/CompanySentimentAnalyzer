@@ -8,7 +8,7 @@ const Slide2 = () => {
     <Slide direction="up" duration={1000} triggerOnce>
       <Col span={24}>
         <Row justify={"center"}>
-          <Title level={2}>{"Mock Title Example"}</Title>
+          <Title level={2}>Lorem ipsum</Title>
         </Row>
         <Row justify={"center"}>
           <Col span={1}>

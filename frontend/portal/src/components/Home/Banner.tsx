@@ -13,17 +13,19 @@ const Banner = () => {
       <Col span={8}>
         <Space direction={"vertical"} size={16}>
           <Row justify={"start"}>
-            <Title level={2}>{"Mock Motivational Phrase."}</Title>
+            <Title level={2}>{"Sentiment Analyzer"}</Title>
           </Row>
           <Row>
             <Paragraph type={"secondary"}>
               {
-                "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam eget ligula eu lectus lobortis condimentum."
+                "Reach your costumers feelings through social media and artificial intelligence"
               }
             </Paragraph>
           </Row>
           <Row>
-            <Button type="primary">{"Try Now"}</Button>
+            <Button type="primary" href={"/api/auth/login"}>
+              {"Try Now"}
+            </Button>
           </Row>
         </Space>
       </Col>
