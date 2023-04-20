@@ -105,4 +105,6 @@ class TwitterScraper(AbstractScraper):
                 )
             )
 
+        print('Finished scraping tweets !')
+
         return tweets
