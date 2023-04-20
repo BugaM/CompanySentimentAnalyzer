@@ -6,3 +6,4 @@ scraper/lib
 scraper/share
 scraper/pyvenv.cfg
 backend/db/__pycache__
+backend/api/__pycache__
