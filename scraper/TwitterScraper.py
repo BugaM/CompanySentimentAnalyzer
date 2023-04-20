@@ -61,6 +61,8 @@ class TwitterScraper(AbstractScraper):
                 )
             )
 
+        print('Finished scraping tweets !')
+
         return tweets
 
     def timed_search(
