@@ -48,7 +48,6 @@ class TwitterScraper(AbstractScraper):
             # Set a cap on the number of tweets in the list.
             if i > self.tweet_cap:
                 break
-<<<<<<< HEAD
 
             tweets.append(
                 NetworkPost(
@@ -65,24 +64,8 @@ class TwitterScraper(AbstractScraper):
         return tweets
 
     def timed_search(
-        self, search_string: str, start_date: datetime, end_date: datetime = datetime.today()
+        self, search_string: str, start_date: datetime, end_date: datetime
     ) -> List[NetworkPost]:
-=======
-
-            tweets.append(
-                NetworkPost(
-                    content=tweet.rawContent,
-                    author=self.parse_user(tweet.user),
-                    date=tweet.date,
-                    source=tweet.source.split(" ")[-1][0:-4],  # This leaves only the platform used. e.g. Android
-                    likes=tweet.likeCount,
-                )
-            )
-
-        return tweets
-
-    def timed_search(self, search_string: str, start_date: datetime, end_date: datetime) -> List[NetworkPost]:
->>>>>>> 448ac60 (Lint)
         # Somebody will get this wrong at some point in time.
         # It may be me.
         if start_date > end_date:
@@ -94,7 +77,6 @@ class TwitterScraper(AbstractScraper):
 
         tweets = []
 
-<<<<<<< HEAD
         query = (
             search_string
             + " since:"
@@ -102,9 +84,7 @@ class TwitterScraper(AbstractScraper):
             + " until:"
             + end.isoformat()[0:10]
         )
-=======
-        query = search_string + " until:" + end.isoformat()[0:10] + " since:" + start.isoformat()[0:10]
->>>>>>> 448ac60 (Lint)
+
         print("Searching with query:\n" + query)
 
         scraper_search = sntwitter.TwitterSearchScraper(query).get_items()
@@ -119,20 +99,14 @@ class TwitterScraper(AbstractScraper):
                     content=tweet.rawContent,
                     author=self.parse_user(tweet.user),
                     date=tweet.date,
-<<<<<<< HEAD
+
                     source=tweet.source.split(" ")[-1][
                         0:-4
                     ],  # This leaves only the platform used. e.g. Android
-=======
-                    source=tweet.source.split(" ")[-1][0:-4],  # This leaves only the platform used. e.g. Android
->>>>>>> 448ac60 (Lint)
+
                     likes=tweet.likeCount,
                 )
             )
 
-<<<<<<< HEAD
         print('Finished scraping tweets !')
-
-=======
->>>>>>> 448ac60 (Lint)
         return tweets
