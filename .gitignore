@@ -1,4 +1,5 @@
 # Scraper venv files
+.DS_Store
 scraper/bin
 scraper/include
 scraper/lib
