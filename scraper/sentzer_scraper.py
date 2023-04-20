@@ -6,6 +6,7 @@ from datetime import datetime
 
 # Sentzer implementations
 from twitter_scraper import TwitterScraper
+
 sys.path.append("../backend/db")
 from db import DBSession  # noqa: E402
 
