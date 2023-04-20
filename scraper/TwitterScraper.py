@@ -64,7 +64,7 @@ class TwitterScraper(AbstractScraper):
         return tweets
 
     def timed_search(
-        self, search_string: str, start_date: datetime, end_date: datetime
+        self, search_string: str, start_date: datetime, end_date: datetime = datetime.today()
     ) -> List[NetworkPost]:
         # Somebody will get this wrong at some point in time.
         # It may be me.
@@ -79,10 +79,10 @@ class TwitterScraper(AbstractScraper):
 
         query = (
             search_string
-            + " until:"
-            + end.isoformat()[0:10]
             + " since:"
             + start.isoformat()[0:10]
+            + " until:"
+            + end.isoformat()[0:10]
         )
         print("Searching with query:\n" + query)
 
