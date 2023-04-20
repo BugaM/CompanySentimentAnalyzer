@@ -6,6 +6,7 @@ import dataclasses
 # Auxiliary Data Class -----------------------------------------------------------------------------------------------#
 #######################################################################################################################
 
+
 @dataclasses.dataclass
 class NetworkUser:
     username: str
@@ -13,6 +14,7 @@ class NetworkUser:
     display_name: str
     join_date: datetime
     total_posts: int
+
 
 @dataclasses.dataclass
 class NetworkPost:
@@ -22,9 +24,11 @@ class NetworkPost:
     source: str
     likes: int
 
+
 #######################################################################################################################
 # Abstract Scraper Class ---------------------------------------------------------------------------------------------#
 #######################################################################################################################
+
 
 class AbstractScraper(ABC):
     """
@@ -80,7 +84,7 @@ class AbstractScraper(ABC):
         :type end_date: datetime
         :rtype: List of NetworkPost
         """
-        pass    
+        pass
 
     # @abstractmethod
     # def set_end_date(self, end_date):
