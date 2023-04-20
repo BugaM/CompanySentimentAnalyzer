@@ -1,8 +1,7 @@
 # Scraper venv files
-scraper/__pycache__
 scraper/bin
 scraper/include
 scraper/lib
 scraper/share
 scraper/pyvenv.cfg
-backend/db/__pycache__
+*/__pycache__
