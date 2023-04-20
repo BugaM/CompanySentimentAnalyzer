@@ -1,14 +1,14 @@
 # General Imports
+import sys
 import argparse
 import pandas as pd
 from datetime import datetime
 
-# Imports to send data to the database
-# from pymongo.mongo_client import MongoClient
-# from pymongo.server_api import ServerApi
+# Sentzer implementations
+from twitter_scraper import TwitterScraper
 
-# Scraper implementation
-from TwitterScraper import TwitterScraper
+sys.path.append('../backend/db')
+from db import DBSession
 
 
 #######################################################################################################################
@@ -129,15 +129,6 @@ if args.f is not None:
 
 # If the flag for sending data to the database is active, send the data.
 if args.s:
-    pass
-    # uri = "mongodb+srv://sentzer:" + 'PASSWORD' + "@sentzer.4b2fczb.mongodb.net/?retryWrites=true&w=majority"
-
-    # # Create a new client and connect to the server
-    # client = MongoClient(uri, server_api=ServerApi('1'))
-
-    # # Send a ping to confirm a successful connection
-    # try:
-    #     client.admin.command('ping')
-    #     print("Pinged your deployment. You successfully connected to MongoDB!")
-    # except Exception as e:
-    #     print(e)
+    db_session = DBSession()
+    data_collection = db_session.get_collection('TwitterPosts').insert_many(posts.to_dict('records'))
+    
