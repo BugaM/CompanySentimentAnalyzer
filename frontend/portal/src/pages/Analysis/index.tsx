@@ -1,5 +1,5 @@
-import Analysis from "@/components/Analysis";
+import Dashboard from "@/components/Dashboard";
 
 export default function AnalysisPage() {
-  return <Analysis />;
+  return <Dashboard />;
 }
