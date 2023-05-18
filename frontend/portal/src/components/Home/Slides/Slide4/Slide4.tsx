@@ -1,7 +1,12 @@
 import { Col, Row, Typography } from "antd";
 
 import Slide4Card from "./Slide4Card";
-import defaultUserIcon from "../../../../../public/defaultuser.png";
+import bugaIcon from "../../../../../public/buga.png";
+import arthurIcon from "../../../../../public/arthur.jpg";
+import eduardoIcon from "../../../../../public/eduardo.jpg";
+import matheusIcon from "../../../../../public/matheus.png";
+import mateusIcon from "../../../../../public/mateus.jpg";
+
 import { Slide } from "react-awesome-reveal";
 
 const { Text } = Typography;
@@ -20,17 +25,17 @@ const Slide4 = () => {
             <Col span={3}>
               <Row justify={"center"}>
                 <Slide4Card
-                  icon={defaultUserIcon.src}
+                  icon={arthurIcon.src}
                   name={"Arthur Stevenson"}
-                  github={"..."}
-                  linkedin={"..."}
+                  github={"https://github.com/Costa-SM"}
+                  linkedin={"https://www.linkedin.com/in/arthurcstevenson/"}
                 />
               </Row>
             </Col>
             <Col span={3}>
               <Row justify={"center"}>
                 <Slide4Card
-                  icon={defaultUserIcon.src}
+                  icon={eduardoIcon.src}
                   name={"Eduardo Simplício"}
                   github={"https://github.com/edmsimplicio"}
                   linkedin={
@@ -42,30 +47,32 @@ const Slide4 = () => {
             <Col span={3}>
               <Row justify={"center"}>
                 <Slide4Card
-                  icon={defaultUserIcon.src}
+                  icon={bugaIcon.src}
                   name={"Marcelo Buga"}
-                  github={"..."}
-                  linkedin={"..."}
+                  github={"https://github.com/BugaM"}
+                  linkedin={"https://www.linkedin.com/in/marcelo-buga/"}
                 />
               </Row>
             </Col>
             <Col span={3}>
               <Row justify={"center"}>
                 <Slide4Card
-                  icon={defaultUserIcon.src}
-                  name={"Mateus Cristo"}
-                  github={"..."}
-                  linkedin={"..."}
+                  icon={mateusIcon.src}
+                  name={"Mateus Melo"}
+                  github={"https://github.com/MateusCristoMelo"}
+                  linkedin={"https://www.linkedin.com/in/mateuscristomelo/"}
                 />
               </Row>
             </Col>
             <Col span={3}>
               <Row>
                 <Slide4Card
-                  icon={defaultUserIcon.src}
+                  icon={matheusIcon.src}
                   name={"Matheus Ramos"}
-                  github={"..."}
-                  linkedin={"..."}
+                  github={"https://github.com/matheus-srm"}
+                  linkedin={
+                    "https://www.linkedin.com/in/matheus-silva-ramos-27477a1b5/"
+                  }
                 />
               </Row>
             </Col>
