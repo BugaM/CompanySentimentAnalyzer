@@ -1,7 +1,7 @@
 from pymongo.mongo_client import MongoClient
 from pymongo.server_api import ServerApi
 
-from credentials import get_db_credentials
+from backend.db.credentials import get_db_credentials
 
 
 class DBSession:
@@ -14,9 +14,7 @@ class DBSession:
         except:
             raise Exception("Could not connect to database.")
 
-    def get_database(self):
-        return self._client["Sentzer"]
+        self._database = self._client["Sentzer"]
 
     def get_collection(self, collection_name: str):
-        database = self.get_database()
-        return database[collection_name]
+        return self._database[collection_name]

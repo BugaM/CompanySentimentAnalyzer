@@ -1,8 +1,9 @@
-from AbstractScraper import AbstractScraper, NetworkUser, NetworkPost
-
-import snscrape.modules.twitter as sntwitter
 from datetime import datetime
 from typing import List
+
+import snscrape.modules.twitter as sntwitter
+
+from scraper.AbstractScraper import AbstractScraper, NetworkPost, NetworkUser
 
 #######################################################################################################################
 # Twitter Scraper Class ----------------------------------------------------------------------------------------------#
