@@ -1,4 +1,4 @@
-from AbstractScraper import AbstractScraper, NetworkUser, NetworkPost
+from abstract_scraper import AbstractScraper, NetworkUser, NetworkPost
 
 import snscrape.modules.twitter as sntwitter
 from datetime import datetime
@@ -49,22 +49,28 @@ class TwitterScraper(AbstractScraper):
             if i > self.tweet_cap:
                 break
 
-            tweets.append(
-                NetworkPost(
-                    content=tweet.rawContent,
-                    author=self.parse_user(tweet.user),
-                    date=tweet.date,
-                    source=tweet.source.split(" ")[-1][
-                        0:-4
-                    ],  # This leaves only the platform used. e.g. Android
-                    likes=tweet.likeCount,
+            if tweet.source is not None:
+                tweets.append(
+                    NetworkPost(
+                        content=tweet.rawContent,
+                        author=self.parse_user(tweet.user),
+                        date=tweet.date,
+                        source=tweet.source.split(" ")[-1][
+                            0:-4
+                        ],  # This leaves only the platform used. e.g. Android
+                        likes=tweet.likeCount,
+                    )
                 )
-            )
+
+        print("Finished scraping tweets !")
 
         return tweets
 
     def timed_search(
-        self, search_string: str, start_date: datetime, end_date: datetime
+        self,
+        search_string: str,
+        start_date: datetime,
+        end_date: datetime = datetime.today(),
     ) -> List[NetworkPost]:
         # Somebody will get this wrong at some point in time.
         # It may be me.
@@ -79,10 +85,10 @@ class TwitterScraper(AbstractScraper):
 
         query = (
             search_string
-            + " until:"
-            + end.isoformat()[0:10]
             + " since:"
             + start.isoformat()[0:10]
+            + " until:"
+            + end.isoformat()[0:10]
         )
         print("Searching with query:\n" + query)
 
@@ -93,16 +99,29 @@ class TwitterScraper(AbstractScraper):
             if i > self.tweet_cap:
                 break
 
-            tweets.append(
-                NetworkPost(
-                    content=tweet.rawContent,
-                    author=self.parse_user(tweet.user),
-                    date=tweet.date,
-                    source=tweet.source.split(" ")[-1][
-                        0:-4
-                    ],  # This leaves only the platform used. e.g. Android
-                    likes=tweet.likeCount,
+            if tweet.source is not None:
+                tweets.append(
+                    NetworkPost(
+                        content=tweet.rawContent,
+                        author=self.parse_user(tweet.user),
+                        date=tweet.date,
+                        source=tweet.source.split(" ")[-1][
+                            0:-4
+                        ],  # This leaves only the platform used. e.g. Android
+                        likes=tweet.likeCount,
+                    )
                 )
-            )
+            else:
+                tweets.append(
+                    NetworkPost(
+                        content=tweet.rawContent,
+                        author=self.parse_user(tweet.user),
+                        date=tweet.date,
+                        source=None,
+                        likes=tweet.likeCount,
+                    )
+                )
+
+        print("Finished scraping tweets !")
 
         return tweets
