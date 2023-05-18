@@ -49,17 +49,19 @@ class TwitterScraper(AbstractScraper):
             if i > self.tweet_cap:
                 break
 
-            tweets.append(
-                NetworkPost(
-                    content=tweet.rawContent,
-                    author=self.parse_user(tweet.user),
-                    date=tweet.date,
-                    source=tweet.source.split(" ")[-1][
-                        0:-4
-                    ],  # This leaves only the platform used. e.g. Android
-                    likes=tweet.likeCount,
+
+            if tweet.source is not None:
+                tweets.append(
+                    NetworkPost(
+                        content=tweet.rawContent,
+                        author=self.parse_user(tweet.user),
+                        date=tweet.date,
+                        source=tweet.source.split(" ")[-1][
+                            0:-4
+                        ],  # This leaves only the platform used. e.g. Android
+                        likes=tweet.likeCount,
+                    )
                 )
-            )
 
         print("Finished scraping tweets !")
 
@@ -98,17 +100,28 @@ class TwitterScraper(AbstractScraper):
             if i > self.tweet_cap:
                 break
 
-            tweets.append(
-                NetworkPost(
-                    content=tweet.rawContent,
-                    author=self.parse_user(tweet.user),
-                    date=tweet.date,
-                    source=tweet.source.split(" ")[-1][
-                        0:-4
-                    ],  # This leaves only the platform used. e.g. Android
-                    likes=tweet.likeCount,
+            if tweet.source is not None:
+                tweets.append(
+                    NetworkPost(
+                        content=tweet.rawContent,
+                        author=self.parse_user(tweet.user),
+                        date=tweet.date,
+                        source=tweet.source.split(" ")[-1][
+                            0:-4
+                        ],  # This leaves only the platform used. e.g. Android
+                        likes=tweet.likeCount,
+                    )
                 )
-            )
+            else:
+                tweets.append(
+                    NetworkPost(
+                        content=tweet.rawContent,
+                        author=self.parse_user(tweet.user),
+                        date=tweet.date,
+                        source=None,
+                        likes=tweet.likeCount,
+                    )
+                )
 
         print("Finished scraping tweets !")
 
