@@ -49,7 +49,6 @@ class TwitterScraper(AbstractScraper):
             if i > self.tweet_cap:
                 break
 
-
             if tweet.source is not None:
                 tweets.append(
                     NetworkPost(
