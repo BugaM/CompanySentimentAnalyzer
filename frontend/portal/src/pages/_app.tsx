@@ -55,9 +55,6 @@ export default function App({ Component, pageProps }: AppProps) {
                 }}
               >
                 <Component {...pageProps} />
-                <Footer
-                  style={{ textAlign: "center", backgroundColor: "#f0fffa" }}
-                >{`Sentzer ©${new Date().getFullYear()}`}</Footer>
               </Content>
             </ConfigProvider>
           </Layout>
