@@ -55,9 +55,7 @@ class TwitterScraper(AbstractScraper):
                         content=tweet.rawContent,
                         author=self.parse_user(tweet.user),
                         date=tweet.date,
-                        source=tweet.source.split(" ")[-1][
-                            0:-4
-                        ],  # This leaves only the platform used. e.g. Android
+                        source=tweet.source.split(" ")[-1][0:-4],  # This leaves only the platform used. e.g. Android
                         likes=tweet.likeCount,
                     )
                 )
@@ -83,13 +81,7 @@ class TwitterScraper(AbstractScraper):
 
         tweets = []
 
-        query = (
-            search_string
-            + " since:"
-            + start.isoformat()[0:10]
-            + " until:"
-            + end.isoformat()[0:10]
-        )
+        query = search_string + " since:" + start.isoformat()[0:10] + " until:" + end.isoformat()[0:10]
         print("Searching with query:\n" + query)
 
         scraper_search = sntwitter.TwitterSearchScraper(query).get_items()
@@ -105,9 +97,7 @@ class TwitterScraper(AbstractScraper):
                         content=tweet.rawContent,
                         author=self.parse_user(tweet.user),
                         date=tweet.date,
-                        source=tweet.source.split(" ")[-1][
-                            0:-4
-                        ],  # This leaves only the platform used. e.g. Android
+                        source=tweet.source.split(" ")[-1][0:-4],  # This leaves only the platform used. e.g. Android
                         likes=tweet.likeCount,
                     )
                 )

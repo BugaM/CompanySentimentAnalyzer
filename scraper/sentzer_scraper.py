@@ -41,8 +41,12 @@ parser.add_argument(
     const=True,
     help="Toggle flag for sending data to the database.",
 )
+parser.add_argument("-r", action="store_const", const=True, help="Toggle flag for searching Reddit.")
 parser.add_argument(
-    "-r", action="store_const", const=True, help="Toggle flag for searching Reddit."
+    "-csv",
+    action="store_const",
+    const=True,
+    help="Toggle flag for saving data to a CSV instead of JSON.",
 )
 
 # Get the arguments.
@@ -59,14 +63,10 @@ if args.c is None:
     raise AssertionError("Post cap was not provided !")
 
 if (args.f is None) and (args.s is None):
-    raise AssertionError(
-        "File to save data not specified, and sending it to the database was not enabled !"
-    )
+    raise AssertionError("File to save data not specified, and sending it to the database was not enabled !")
 
 if (args.de is not None) and (args.ds is None):
-    raise AssertionError(
-        "Ending date for interval was provided, but starting date was not !"
-    )
+    raise AssertionError("Ending date for interval was provided, but starting date was not !")
 
 
 #######################################################################################################################
@@ -83,7 +83,11 @@ if args.de is not None:
     args.de = datetime.fromisoformat(args.de)
 
 if args.f is not None:
-    args.f = args.f + ".json"
+    if args.csv:
+        args.f = args.f + ".csv"
+
+    else:
+        args.f = args.f + ".json"
 
 #######################################################################################################################
 # Scraper Call -------------------------------------------------------------------------------------------------------#
@@ -100,6 +104,8 @@ if (args.ds is not None) and (args.de is not None):
     tweets = twitter_scraper.timed_search(args.q, start_date=args.ds, end_date=args.de)
 elif args.ds is not None:
     tweets = twitter_scraper.timed_search(args.q, start_date=args.ds)
+else:
+    raise SyntaxError("No starting date for scraping provided !")
 
 
 #######################################################################################################################
@@ -123,12 +129,15 @@ posts = pd.DataFrame.from_dict(posts, orient="columns")
 
 # If the flag for saving data to a file is active, dump the data.
 if args.f is not None:
-    print("Dumping data into " + args.f)
-    posts.to_json(args.f, orient="records")
+    if args.csv:
+        print("Dumping data into " + args.f)
+        posts.to_csv(args.f)
+    else:
+        print("Dumping data into " + args.f)
+        posts.to_json(args.f, orient="records")
+
 
 # If the flag for sending data to the database is active, send the data.
 if args.s:
     db_session = DBSession()
-    data_collection = db_session.get_collection("TwitterPosts").insert_many(
-        posts.to_dict("records")
-    )
+    data_collection = db_session.get_collection("TwitterPosts").insert_many(posts.to_dict("records"))
