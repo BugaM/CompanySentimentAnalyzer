@@ -41,7 +41,9 @@ parser.add_argument(
     const=True,
     help="Toggle flag for sending data to the database.",
 )
-parser.add_argument("-r", action="store_const", const=True, help="Toggle flag for searching Reddit.")
+parser.add_argument(
+    "-r", action="store_const", const=True, help="Toggle flag for searching Reddit."
+)
 parser.add_argument(
     "-csv",
     action="store_const",
@@ -63,10 +65,14 @@ if args.c is None:
     raise AssertionError("Post cap was not provided !")
 
 if (args.f is None) and (args.s is None):
-    raise AssertionError("File to save data not specified, and sending it to the database was not enabled !")
+    raise AssertionError(
+        "File to save data not specified, and sending it to the database was not enabled !"
+    )
 
 if (args.de is not None) and (args.ds is None):
-    raise AssertionError("Ending date for interval was provided, but starting date was not !")
+    raise AssertionError(
+        "Ending date for interval was provided, but starting date was not !"
+    )
 
 
 #######################################################################################################################
@@ -140,4 +146,6 @@ if args.f is not None:
 # If the flag for sending data to the database is active, send the data.
 if args.s:
     db_session = DBSession()
-    data_collection = db_session.get_collection("TwitterPosts").insert_many(posts.to_dict("records"))
+    data_collection = db_session.get_collection("TwitterPosts").insert_many(
+        posts.to_dict("records")
+    )
