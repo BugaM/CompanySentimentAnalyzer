@@ -5,9 +5,5 @@ scraper/include
 scraper/lib
 scraper/share
 scraper/pyvenv.cfg
-backend/__pycache__
-backend/db/__pycache__
-backend/api/__pycache__
-backend/models/__pycache__
 Sentzer.egg-info
 */__pycache__
