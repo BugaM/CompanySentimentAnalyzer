@@ -44,6 +44,12 @@ parser.add_argument(
 parser.add_argument(
     "-r", action="store_const", const=True, help="Toggle flag for searching Reddit."
 )
+parser.add_argument(
+    "-csv",
+    action="store_const",
+    const=True,
+    help="Toggle flag for saving data to a CSV instead of JSON.",
+)
 
 # Get the arguments.
 args = parser.parse_args()
@@ -83,7 +89,11 @@ if args.de is not None:
     args.de = datetime.fromisoformat(args.de)
 
 if args.f is not None:
-    args.f = args.f + ".json"
+    if args.csv:
+        args.f = args.f + ".csv"
+
+    else:
+        args.f = args.f + ".json"
 
 #######################################################################################################################
 # Scraper Call -------------------------------------------------------------------------------------------------------#
@@ -100,6 +110,8 @@ if (args.ds is not None) and (args.de is not None):
     tweets = twitter_scraper.timed_search(args.q, start_date=args.ds, end_date=args.de)
 elif args.ds is not None:
     tweets = twitter_scraper.timed_search(args.q, start_date=args.ds)
+else:
+    raise SyntaxError("No starting date for scraping provided !")
 
 
 #######################################################################################################################
@@ -123,8 +135,13 @@ posts = pd.DataFrame.from_dict(posts, orient="columns")
 
 # If the flag for saving data to a file is active, dump the data.
 if args.f is not None:
-    print("Dumping data into " + args.f)
-    posts.to_json(args.f, orient="records")
+    if args.csv:
+        print("Dumping data into " + args.f)
+        posts.to_csv(args.f)
+    else:
+        print("Dumping data into " + args.f)
+        posts.to_json(args.f, orient="records")
+
 
 # If the flag for sending data to the database is active, send the data.
 if args.s:
