@@ -4,7 +4,7 @@ import pandas as pd
 from datetime import datetime
 
 # Sentzer implementations
-from scraper.twitter_scraper import TwitterScraper
+from twitter_scraper import TwitterScraper
 
 from backend.db import get_db  # noqa: E402
 

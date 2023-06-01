@@ -1,4 +1,4 @@
-from scraper.abstract_scraper import AbstractScraper, NetworkUser, NetworkPost
+from abstract_scraper import AbstractScraper, NetworkUser, NetworkPost
 
 import snscrape.modules.twitter as sntwitter
 from datetime import datetime
@@ -42,7 +42,9 @@ class TwitterScraper(AbstractScraper):
     def search_query(self, query: str) -> List[NetworkPost]:
         tweets = []
 
-        scraper_search = sntwitter.TwitterSearchScraper(query).get_items()
+        scraper_search = sntwitter.TwitterSearchScraper(
+            query, maxEmptyPages=1000
+        ).get_items()
 
         for i, tweet in enumerate(scraper_search):
             # Set a cap on the number of tweets in the list.
@@ -92,7 +94,9 @@ class TwitterScraper(AbstractScraper):
         )
         print("Searching with query:\n" + query)
 
-        scraper_search = sntwitter.TwitterSearchScraper(query).get_items()
+        scraper_search = sntwitter.TwitterSearchScraper(
+            query, maxEmptyPages=1000
+        ).get_items()
 
         for i, tweet in enumerate(scraper_search):
             # Set a cap on the number of tweets in the list.
