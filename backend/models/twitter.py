@@ -12,7 +12,9 @@ class TwitterPost:
     likes: str
 
 
-def from_query_to_twitter_posts(queried_post: List[Dict[str, Any]]) -> List[TwitterPost]:
+def from_query_to_twitter_posts(
+    queried_post: List[Dict[str, Any]]
+) -> List[TwitterPost]:
     twitter_posts = []
     for post in queried_post:
         twitter_posts.append(

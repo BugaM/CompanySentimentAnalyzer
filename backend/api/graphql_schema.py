@@ -1,11 +1,19 @@
-from typing import List, Optional
+from typing import List
 
 import strawberry
-from fastapi import FastAPI
+from fastapi import Depends
 from strawberry.fastapi import GraphQLRouter
 
-from backend.db import DBSession
+from strawberry.types import Info
+
+from backend.db import get_db
 from backend.models.twitter import TwitterPost, from_query_to_twitter_posts
+
+
+async def get_context(db_session=Depends(get_db)):
+    return {
+        "db_session": db_session,
+    }
 
 
 @strawberry.type
@@ -13,10 +21,11 @@ class Query:
     @strawberry.field
     def twitter_posts(
         self,
+        info: Info,
         author: str,
     ) -> List[TwitterPost]:
-        session = DBSession()
-        twitter_posts_collection = session.get_collection("TwitterPosts")
+        db_session = info.context["db_session"]
+        twitter_posts_collection = db_session.get_collection("TwitterPosts")
 
         query = {}
         query["author"] = author
@@ -25,14 +34,11 @@ class Query:
         return from_query_to_twitter_posts(queried_posts)
 
 
-def start_server():
-    schema = strawberry.Schema(Query)
+schema = strawberry.Schema(
+    query=Query,
+)
 
-    graphql_app = GraphQLRouter(schema)
-
-    app = FastAPI()
-    app.include_router(graphql_app, prefix="/graphql")
-
-
-if __name__ == "__main__":
-    start_server()
+router = GraphQLRouter(
+    schema,
+    context_getter=get_context,
+)

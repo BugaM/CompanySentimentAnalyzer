@@ -18,3 +18,7 @@ class DBSession:
 
     def get_collection(self, collection_name: str):
         return self._database[collection_name]
+
+
+def get_db():
+    return DBSession()

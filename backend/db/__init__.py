@@ -1,1 +1,1 @@
-from .db import DBSession
+from .db import get_db
