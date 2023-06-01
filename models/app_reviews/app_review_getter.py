@@ -18,7 +18,6 @@ APP_IDS = [
 
 
 def get_reviews():
-
     app_infos = []
 
     for ap in tqdm(APP_IDS):
@@ -40,7 +39,11 @@ def get_reviews():
                     filter_score_with=score,
                 )
                 for r in rvs:
-                    r["sortOrder"] = "most_relevant" if sort_order == Sort.MOST_RELEVANT else "newest"
+                    r["sortOrder"] = (
+                        "most_relevant"
+                        if sort_order == Sort.MOST_RELEVANT
+                        else "newest"
+                    )
                     r["appId"] = ap
                 app_reviews.extend(rvs)
 
