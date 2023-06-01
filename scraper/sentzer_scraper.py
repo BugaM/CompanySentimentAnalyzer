@@ -1,14 +1,12 @@
 # General Imports
-import sys
 import argparse
 import pandas as pd
 from datetime import datetime
 
 # Sentzer implementations
-from twitter_scraper import TwitterScraper
+from scraper.twitter_scraper import TwitterScraper
 
-sys.path.append("../backend/db")
-from db import DBSession  # noqa: E402
+from backend.db import get_db  # noqa: E402
 
 #######################################################################################################################
 # Parser Implementation ----------------------------------------------------------------------------------------------#
@@ -145,7 +143,7 @@ if args.f is not None:
 
 # If the flag for sending data to the database is active, send the data.
 if args.s:
-    db_session = DBSession()
+    db_session = get_db()
     data_collection = db_session.get_collection("TwitterPosts").insert_many(
         posts.to_dict("records")
     )

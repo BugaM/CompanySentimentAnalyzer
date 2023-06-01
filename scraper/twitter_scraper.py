@@ -1,4 +1,4 @@
-from abstract_scraper import AbstractScraper, NetworkUser, NetworkPost
+from scraper.abstract_scraper import AbstractScraper, NetworkUser, NetworkPost
 
 import snscrape.modules.twitter as sntwitter
 from datetime import datetime
