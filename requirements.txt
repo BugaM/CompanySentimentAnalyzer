@@ -58,7 +58,7 @@ strawberry-graphql==0.180.0
 tomli==2.0.1
 tornado==6.2
 traitlets==5.9.0
-transformers=4.29.2
+transformers==4.29.2
 typing_extensions==4.6.2
 tzdata==2023.3
 urllib3==1.26.15
