@@ -1,0 +1,19 @@
+"""Exposes a URL that specifies the behaviour of this scalar."""
+directive @specifiedBy(
+  """The URL that specifies the behaviour of this scalar."""
+  url: String!
+) on SCALAR
+
+type Query {
+  twitterPosts(author: String!): [TwitterPost!]!
+}
+
+type TwitterPost {
+  query: String!
+  content: String!
+  author: String!
+  date: String!
+  source: String!
+  likes: String!
+}
+

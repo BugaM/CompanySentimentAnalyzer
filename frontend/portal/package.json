@@ -3,10 +3,18 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
+    "dev": "npm run relay && next dev",
+    "build": "npm run relay && next build",
+    "start": "npm run relay && next start",
+    "relay": "relay-compiler",
     "lint": "next lint"
+  },
+  "relay": {
+    "src": "./src/",
+    "schema": "./schema.graphql",
+    "artifactDirectory": "./src/__generated__",
+    "language": "typescript",
+    "eagerEsModules": true
   },
   "dependencies": {
     "@ant-design/icons": "^5.0.1",
@@ -18,16 +26,23 @@
     "antd": "^5.3.2",
     "chart.js": "^4.2.1",
     "eslint": "8.36.0",
+    "get-graphql-schema": "^2.1.2",
     "next": "13.2.4",
     "react": "18.2.0",
     "react-awesome-reveal": "^4.2.3",
     "react-chartjs-2": "^5.2.0",
     "react-dom": "18.2.0",
     "react-icons": "^4.8.0",
-    "sharp": "^0.32.0"
+    "react-relay": "^15.0.0",
+    "relay-runtime": "^15.0.0",
+    "sharp": "^0.32.0",
+    "styled-components": "^5.3.11"
   },
   "devDependencies": {
+    "@types/react-relay": "^14.1.4",
+    "babel-plugin-relay": "^15.0.0",
     "eslint-config-next": "13.2.4",
+    "relay-compiler": "^15.0.0",
     "typescript": "5.0.2"
   }
 }

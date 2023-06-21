@@ -7,3 +7,4 @@ scraper/share
 scraper/pyvenv.cfg
 Sentzer.egg-info
 */__pycache__
+*.pyc
