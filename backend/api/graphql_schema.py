@@ -9,7 +9,6 @@ from backend.db import get_db
 from backend.models.twitter import (
     TwitterPost,
     TwitterPostInference,
-    from_query_to_twitter_post_inferences,
     from_query_to_twitter_posts,
 )
 
@@ -37,23 +36,6 @@ class Query:
 
         return from_query_to_twitter_posts(queried_posts)
 
-    @strawberry.field
-    def twitter_post_inferences(
-        self,
-        info: Info,
-        author: str,
-    ) -> List[str]:
-        db_session = info.context["db_session"]
-        twitter_post_inferences_collection = db_session.get_collection(
-            "TwitterPostInferences"
-        )
-
-        query = {}
-        query["author"] = author
-        queried_posts = twitter_post_inferences_collection.find(query)
-
-        return from_query_to_twitter_post_inferences(queried_posts)
-
 
 @strawberry.type
 class Mutation:
@@ -76,6 +58,7 @@ class Mutation:
                     "date": post.date,
                     "source": post.source,
                     "likes": post.likes,
+                    "label": post.label,
                     "score": post.score,
                 }
             )
