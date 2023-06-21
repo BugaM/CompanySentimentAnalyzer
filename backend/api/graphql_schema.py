@@ -3,11 +3,15 @@ from typing import List
 import strawberry
 from fastapi import Depends
 from strawberry.fastapi import GraphQLRouter
-
 from strawberry.types import Info
 
 from backend.db import get_db
-from backend.models.twitter import TwitterPost, from_query_to_twitter_posts
+from backend.models.twitter import (
+    TwitterPost,
+    TwitterPostInference,
+    from_query_to_twitter_post_inferences,
+    from_query_to_twitter_posts,
+)
 
 
 async def get_context(db_session=Depends(get_db)):
@@ -33,9 +37,55 @@ class Query:
 
         return from_query_to_twitter_posts(queried_posts)
 
+    @strawberry.field
+    def twitter_post_inferences(
+        self,
+        info: Info,
+        author: str,
+    ) -> List[str]:
+        db_session = info.context["db_session"]
+        twitter_post_inferences_collection = db_session.get_collection(
+            "TwitterPostInferences"
+        )
+
+        query = {}
+        query["author"] = author
+        queried_posts = twitter_post_inferences_collection.find(query)
+
+        return from_query_to_twitter_post_inferences(queried_posts)
+
+
+@strawberry.type
+class Mutation:
+    @strawberry.mutation
+    def add_twitter_post_inferences(
+        self, info: Info, twitter_post_inferences: List[TwitterPostInference]
+    ) -> None:
+        db_session = info.context["db_session"]
+        twitter_post_inferences_collection = db_session.get_collection(
+            "TwitterPostInferences"
+        )
+
+        queries = []
+        for post in twitter_post_inferences:
+            queries.append(
+                {
+                    "query": post.query,
+                    "content": post.content,
+                    "author": post.author,
+                    "date": post.date,
+                    "source": post.source,
+                    "likes": post.likes,
+                    "score": post.score,
+                }
+            )
+
+        twitter_post_inferences_collection.insert_many(queries)
+
 
 schema = strawberry.Schema(
     query=Query,
+    mutation=Mutation,
 )
 
 router = GraphQLRouter(

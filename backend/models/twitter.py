@@ -12,6 +12,17 @@ class TwitterPost:
     likes: str
 
 
+@strawberry.input
+class TwitterPostInference:
+    query: str
+    content: str
+    author: str
+    date: str
+    source: str
+    likes: str
+    score: float
+
+
 def from_query_to_twitter_posts(
     queried_post: List[Dict[str, Any]]
 ) -> List[TwitterPost]:
@@ -29,3 +40,15 @@ def from_query_to_twitter_posts(
         )
 
     return twitter_posts
+
+
+def from_query_to_twitter_post_inferences(
+    queried_post: List[Dict[str, Any]]
+) -> List[TwitterPostInference]:
+    twitter_post_inferences = []
+    for post in queried_post:
+        twitter_post_inferences.append(
+            TwitterPostInference(twitter_post=post["twitter_post"], score=post["score"])
+        )
+
+    return twitter_post_inferences
