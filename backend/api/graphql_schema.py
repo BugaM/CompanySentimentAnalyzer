@@ -50,7 +50,7 @@ class Query:
         info: Info,
         end_date: Optional[datetime] = datetime.today(),
         start_date: Optional[datetime] = None,
-        limit: int = 1000,
+        limit: int = 10000,
     ) -> List[TwitterPostInference]:
         db_session = info.context["db_session"]
         twitter_post_inferences_collection = db_session.get_collection(

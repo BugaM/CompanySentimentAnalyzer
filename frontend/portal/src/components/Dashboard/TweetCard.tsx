@@ -10,12 +10,12 @@ import Link from "next/link";
 
 interface TweetCardProps {
   date: string;
-  name: string;
-  text: string;
-  like: number;
+  author: string;
+  content: string;
+  likes: number;
 }
 
-const TweetCard = ({ date, name, text, like }: TweetCardProps) => {
+const TweetCard = ({ date, author, content, likes }: TweetCardProps) => {
   return (
     <Col span={12}>
       <Card size="small">
@@ -24,10 +24,10 @@ const TweetCard = ({ date, name, text, like }: TweetCardProps) => {
             <Col flex="auto">
               <Space>
                 <Avatar src={as.src} />
-                <Link href={`https://twitter.com/${name}/`} target="_blank">
+                <Link href={`https://twitter.com/${author}/`} target="_blank">
                   <Typography.Text
                     style={{ color: "#00acee" }}
-                  >{`@${name}`}</Typography.Text>
+                  >{`@${author}`}</Typography.Text>
                 </Link>
               </Space>
             </Col>
@@ -38,14 +38,16 @@ const TweetCard = ({ date, name, text, like }: TweetCardProps) => {
             </Col>
           </Row>
           <Row>
-            <Typography.Text style={{ fontSize: 13 }}>{text}</Typography.Text>
+            <Typography.Text style={{ fontSize: 13 }}>
+              {content}
+            </Typography.Text>
           </Row>
           <Row
             justify="end"
             style={{ position: "absolute", bottom: 12, right: 24 }}
           >
             <Space size="small">
-              {like}
+              {likes}
               <HeartOutlined />
             </Space>
           </Row>
