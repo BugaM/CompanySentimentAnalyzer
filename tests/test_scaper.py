@@ -1,5 +1,5 @@
 def test_scrape_number():
-    from twitter_scraper import TwitterScraper
+    from scraper.twitter_scraper import TwitterScraper
     from datetime import datetime
 
     start_date = datetime.fromisoformat("2022-05-05")
@@ -12,7 +12,7 @@ def test_scrape_number():
 
 
 def test_starting_date():
-    from twitter_scraper import TwitterScraper
+    from scraper.twitter_scraper import TwitterScraper
     from datetime import datetime
 
     start_date = datetime.fromisoformat("2022-05-05")
