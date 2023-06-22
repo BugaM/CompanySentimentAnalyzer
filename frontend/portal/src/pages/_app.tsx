@@ -1,10 +1,13 @@
 import "@/styles/globals.css";
 import type { AppProps } from "next/app";
 import { ConfigProvider, Layout } from "antd";
+import { RelayEnvironment } from "@/relay_env";
 import { UserProvider } from "@auth0/nextjs-auth0";
+import { RelayEnvironmentProvider } from "react-relay";
 
 import Header from "@/components/Header";
 import Sidebar from "@/components/Sidebar";
+import React from "react";
 
 const { Content, Footer } = Layout;
 
@@ -36,32 +39,31 @@ export default function App({ Component, pageProps }: AppProps) {
       }}
     >
       <UserProvider>
-        <Layout style={{ minHeight: "100vh" }}>
-          <Header />
-          <Layout>
-            <Sidebar />
-            <ConfigProvider
-              theme={{
-                components: {
-                  Typography: {
-                    colorText: "#000000",
+        <RelayEnvironmentProvider environment={RelayEnvironment}>
+          <Layout style={{ minHeight: "100vh" }}>
+            <Header />
+            <Layout>
+              <Sidebar />
+              <ConfigProvider
+                theme={{
+                  components: {
+                    Typography: {
+                      colorText: "#000000",
+                    },
                   },
-                },
-              }}
-            >
-              <Content
-                style={{
-                  background: "#FFFFFF",
                 }}
               >
-                <Component {...pageProps} />
-                <Footer
-                  style={{ textAlign: "center", backgroundColor: "#f0fffa" }}
-                >{`Sentzer ©${new Date().getFullYear()}`}</Footer>
-              </Content>
-            </ConfigProvider>
+                <Content
+                  style={{
+                    background: "#FFFFFF",
+                  }}
+                >
+                  <Component {...pageProps} />
+                </Content>
+              </ConfigProvider>
+            </Layout>
           </Layout>
-        </Layout>
+        </RelayEnvironmentProvider>
       </UserProvider>
     </ConfigProvider>
   );

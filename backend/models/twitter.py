@@ -27,5 +27,5 @@ def from_query_to_twitter_posts(
                 likes=post["likes"],
             )
         )
-
+    print(len(twitter_posts))
     return twitter_posts

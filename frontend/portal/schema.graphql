@@ -1,11 +1,23 @@
-"""Exposes a URL that specifies the behaviour of this scalar."""
+"""
+Exposes a URL that specifies the behaviour of this scalar.
+"""
 directive @specifiedBy(
-  """The URL that specifies the behaviour of this scalar."""
+  """
+  The URL that specifies the behaviour of this scalar.
+  """
   url: String!
 ) on SCALAR
 
+"""
+Date with time (isoformat)
+"""
+scalar DateTime
+
 type Query {
-  twitterPosts(author: String!): [TwitterPost!]!
+  twitterPosts(
+    endDate: DateTime = "2023-06-22T00:18:20.473264"
+    startDate: DateTime = null
+  ): [TwitterPost!]!
 }
 
 type TwitterPost {
@@ -16,4 +28,3 @@ type TwitterPost {
   source: String!
   likes: String!
 }
-
