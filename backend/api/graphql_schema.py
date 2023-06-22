@@ -1,4 +1,5 @@
-from typing import List
+from typing import List, Optional
+from datetime import datetime
 
 import strawberry
 from fastapi import Depends
@@ -25,14 +26,18 @@ class Query:
     def twitter_posts(
         self,
         info: Info,
-        author: str,
+        end_date: Optional[datetime] = datetime.today(),
+        start_date: Optional[datetime] = None,
     ) -> List[TwitterPost]:
         db_session = info.context["db_session"]
         twitter_posts_collection = db_session.get_collection("TwitterPosts")
 
         query = {}
-        query["author"] = author
-        queried_posts = twitter_posts_collection.find(query)
+        if start_date != None:
+            query["date"] = {'$lt': end_date, '$gte': start_date}
+        else:
+            query["date"] = {'$lt': end_date}
+        queried_posts = twitter_posts_collection.find(query).limit(1000)
 
         return from_query_to_twitter_posts(queried_posts)
 
