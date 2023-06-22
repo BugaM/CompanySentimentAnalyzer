@@ -1,23 +1,19 @@
-"""
-Exposes a URL that specifies the behaviour of this scalar.
-"""
+"""Exposes a URL that specifies the behaviour of this scalar."""
 directive @specifiedBy(
-  """
-  The URL that specifies the behaviour of this scalar.
-  """
+  """The URL that specifies the behaviour of this scalar."""
   url: String!
 ) on SCALAR
 
-"""
-Date with time (isoformat)
-"""
+"""Date with time (isoformat)"""
 scalar DateTime
 
+type Mutation {
+  addTwitterPostInferences(twitterPostInferences: [TwitterPostInferenceInput!]!): Void
+}
+
 type Query {
-  twitterPosts(
-    endDate: DateTime = "2023-06-22T00:18:20.473264"
-    startDate: DateTime = null
-  ): [TwitterPost!]!
+  twitterPosts(endDate: DateTime = "2023-06-22T11:24:51.889070", startDate: DateTime = null, limit: Int! = 1000): [TwitterPost!]!
+  twitterPostInferences(endDate: DateTime = "2023-06-22T11:24:51.889354", startDate: DateTime = null, limit: Int! = 1000): [TwitterPostInference!]!
 }
 
 type TwitterPost {
@@ -26,5 +22,31 @@ type TwitterPost {
   author: String!
   date: String!
   source: String!
-  likes: String!
+  likes: Int!
 }
+
+type TwitterPostInference {
+  query: String!
+  content: String!
+  author: String!
+  date: DateTime!
+  source: String!
+  likes: Int!
+  label: Int!
+  score: Float!
+}
+
+input TwitterPostInferenceInput {
+  query: String!
+  content: String!
+  author: String!
+  date: DateTime!
+  source: String!
+  likes: Int!
+  label: Int!
+  score: Float!
+}
+
+"""Represents NULL values"""
+scalar Void
+

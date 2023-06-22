@@ -1,5 +1,5 @@
 /**
- * @generated SignedSource<<376f71a0e44861a271780c185c647819>>
+ * @generated SignedSource<<35f37a6d44ab25d6d84381093336428a>>
  * @lightSyntaxTransform
  * @nogrep
  */
@@ -11,12 +11,14 @@
 import { ConcreteRequest, Query } from 'relay-runtime';
 export type DashboardQuery$variables = {};
 export type DashboardQuery$data = {
-  readonly twitterPosts: ReadonlyArray<{
+  readonly twitterPostInferences: ReadonlyArray<{
     readonly author: string;
     readonly content: string;
-    readonly date: string;
-    readonly likes: string;
+    readonly date: any;
+    readonly label: number;
+    readonly likes: number;
     readonly query: string;
+    readonly score: number;
   }>;
 };
 export type DashboardQuery = {
@@ -29,9 +31,9 @@ var v0 = [
   {
     "alias": null,
     "args": null,
-    "concreteType": "TwitterPost",
+    "concreteType": "TwitterPostInference",
     "kind": "LinkedField",
-    "name": "twitterPosts",
+    "name": "twitterPostInferences",
     "plural": true,
     "selections": [
       {
@@ -68,6 +70,20 @@ var v0 = [
         "kind": "ScalarField",
         "name": "query",
         "storageKey": null
+      },
+      {
+        "alias": null,
+        "args": null,
+        "kind": "ScalarField",
+        "name": "label",
+        "storageKey": null
+      },
+      {
+        "alias": null,
+        "args": null,
+        "kind": "ScalarField",
+        "name": "score",
+        "storageKey": null
       }
     ],
     "storageKey": null
@@ -91,16 +107,16 @@ return {
     "selections": (v0/*: any*/)
   },
   "params": {
-    "cacheID": "c9a3313ffc0e0f0fe04eade4ea76c227",
+    "cacheID": "c949ed313e494ce52c06996a1a20d5f1",
     "id": null,
     "metadata": {},
     "name": "DashboardQuery",
     "operationKind": "query",
-    "text": "query DashboardQuery {\n  twitterPosts {\n    author\n    content\n    date\n    likes\n    query\n  }\n}\n"
+    "text": "query DashboardQuery {\n  twitterPostInferences {\n    author\n    content\n    date\n    likes\n    query\n    label\n    score\n  }\n}\n"
   }
 };
 })();
 
-(node as any).hash = "d58d3a5b8011bdb0738a172f3df0047b";
+(node as any).hash = "606e89d6da8e779cfed37a53165fe49b";
 
 export default node;

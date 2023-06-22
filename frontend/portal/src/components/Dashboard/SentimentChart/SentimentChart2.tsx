@@ -69,7 +69,8 @@ const SentimentChart = ({ data }: SentimentChartProps) => {
     [days]
   );
 
-  let tweetSum: number[] = [];
+  let tweetSent: number[] = [];
+  let tweetCount: number[] = [];
 
   tweets.forEach((tweet) => {
     const parts = tweet.date.split("-");
@@ -80,10 +81,12 @@ const SentimentChart = ({ data }: SentimentChartProps) => {
 
     const dateString = `${year}-${month}-${day}`;
     const index = days.indexOf(dateString);
-    if (tweetSum[index] === undefined) {
-      tweetSum[index] = 0;
+    if (tweetCount[index] === undefined) {
+      tweetCount[index] = 0;
+      tweetSent[index] = 0;
     }
-    tweetSum[index] += 1;
+    tweetCount[index] += 1;
+    tweetSent[index] += tweet.label;
   });
 
   const chartData = {
@@ -91,7 +94,7 @@ const SentimentChart = ({ data }: SentimentChartProps) => {
     datasets: [
       {
         label: tweets[0].query,
-        data: tweetSum,
+        data: tweetSent.map((sent, i) => sent / tweetCount[i]),
         borderColor: "rgb(7, 200, 120)",
         backgroundColor: "rgba(10, 170, 74, 0.5)",
       },

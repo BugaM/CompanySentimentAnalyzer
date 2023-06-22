@@ -22,7 +22,6 @@ function fetchQuery(operation: RequestParameters, variables: Variables) {
       variables,
     }),
   }).then((response) => {
-    console.log(response);
     return response.json();
   });
 }
