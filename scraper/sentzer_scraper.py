@@ -123,7 +123,7 @@ for entry in tweets:
             "query": args.q,
             "content": entry.content,
             "author": entry.author.username,
-            "date": entry.date.strftime("%Y-%d-%m"),
+            "date": entry.date,
             "source": entry.source,
             "likes": entry.likes,
         }
