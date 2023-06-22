@@ -7,6 +7,4 @@ def create_app() -> FastAPI:
     app = FastAPI()
     app.include_router(graphql_router, prefix="/graphql")
 
-    from backend.models.twitter import TwitterPost
-
     return app
