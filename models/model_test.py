@@ -3,7 +3,7 @@ import evaluate
 from transformers import pipeline, AutoTokenizer
 
 MODEL_PATH = "models/trainer/model_sentzer_app"
-MINIMAL_ALL = 0.70
+MINIMAL_ALL = 0.75
 
 model_checkpoint = "neuralmind/bert-base-portuguese-cased"
 tokenizer = AutoTokenizer.from_pretrained(model_checkpoint)
@@ -12,7 +12,7 @@ model = pipeline("sentiment-analysis", model=MODEL_PATH, tokenizer=tokenizer)
 
 def get_sample():
     df = pd.read_csv("models/sentzer_labels_v1.csv")
-    return df.sample(n=100, random_state=8)  # seed for reproducibility
+    return df.sample(n=100, random_state=50)  # seed for reproducibility
 
 
 def convert(model_outputs):
